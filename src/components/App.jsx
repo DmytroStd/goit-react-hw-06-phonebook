@@ -1,15 +1,9 @@
 ///////////
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  addContactAction,
-  removeContactAction,
-} from 'redux/contacts/items/items-slice';
-import {
-  getFilterContacts,
-  getContacts,
-} from 'redux/contacts/items/items-selectors';
-import { setFilter } from 'redux/contacts/filter/filter-slice';
-import { getFilter } from 'redux/contacts/filter/filter-selectors';
+import { addContactAction, removeContactAction } from 'redux/itemsSlice';
+import { getFilterContacts, getContacts } from 'redux/selectors';
+import { setFilter } from 'redux/filterSlice';
+import { getFilter } from 'redux/selectors';
 ///////////
 import Form from './contact-form/ContactForm';
 import Filter from './filter/Filter';
@@ -21,7 +15,7 @@ import { SecondaryTitle } from './titles/SecondaryTitle';
 const App = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
-  const filteredContacts = getFilterContacts(contacts, filter);
+  const filtredContacts = getFilterContacts(contacts, filter);
   const dispatch = useDispatch();
 
   const addContact = data => {
@@ -40,13 +34,9 @@ const App = () => {
     <Container>
       <HeroTitle />
       <Form onSubmit={addContact} contacts={contacts} />
-
       <SecondaryTitle />
       <Filter value={filter} onChange={changeFilter} />
-      <ContactList
-        contacts={filteredContacts}
-        onDeleteContact={deleteContact}
-      />
+      <ContactList contacts={filtredContacts} onDeleteContact={deleteContact} />
     </Container>
   );
 };
