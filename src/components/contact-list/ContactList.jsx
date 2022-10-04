@@ -7,18 +7,24 @@ import styles from './ContactList.module.css';
 const ContactList = ({ contacts, onDeleteContact }) => {
   return (
     <>
-      <ul className={styles.list}>
-        {contacts?.map(contact => (
-          <ContactListItem
-            className={styles.item}
-            key={nanoid()}
-            id={contact.id}
-            name={contact.name}
-            number={contact.number}
-            onDeleteContact={onDeleteContact}
-          />
-        ))}
-      </ul>
+      {contacts.length > 0 ? (
+        <ul className={styles.list}>
+          {contacts?.map(contact => (
+            <ContactListItem
+              className={styles.item}
+              key={nanoid()}
+              id={contact.id}
+              name={contact.name}
+              number={contact.number}
+              onDeleteContact={onDeleteContact}
+            />
+          ))}
+        </ul>
+      ) : (
+        <div>
+          <p className={styles.text}>your phonebook is empty</p>
+        </div>
+      )}
     </>
   );
 };
